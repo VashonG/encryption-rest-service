@@ -11,7 +11,7 @@
     "lodash": "^4.17.21",
     "morgan": "~1.9.1",
     "node-jose": "^2.2.0",
-    "pug": "2.0.4",
+    "pug": "3.0.1",
     "swagger-ui-express": "^4.3.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1"
