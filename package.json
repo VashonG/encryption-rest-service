@@ -10,7 +10,7 @@
     "http-errors": "~1.6.3",
     "lodash": "^4.17.21",
     "morgan": "~1.9.1",
-    "node-jose": "^1.1.4",
+    "node-jose": "^2.2.0",
     "pug": "2.0.4",
     "swagger-ui-express": "^4.3.0",
     "cors": "^2.8.5",
