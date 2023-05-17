@@ -1,0 +1,613 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "JWE JWS Encryption Rest Service",
+    "version": "Version 1.0.0",
+    "title": "JWE JWS Encryption Rest Service",
+    "termsOfService": "#\n# *NOTICE: The software and accompanying information and documentation (together, the “Software”) remain the property\n# of and are proprietary to Visa and its suppliers and affiliates. The Software remains protected by intellectual\n# property rights and may be covered by U.S. and foreign patents or patent applications. The Software is licensed and\n# not sold.*\n#\n# * By accessing the Software you are agreeing to Visa's terms of use (developer.visa.com/terms) and privacy policy (\n# developer.visa.com/privacy).In addition, all permissible uses of the Software must be in support of Visa products,\n# programs and services provided through the Visa Developer Program (VDP) platform only (developer.visa.com). **THE\n# SOFTWARE AND ANY ASSOCIATED INFORMATION OR DOCUMENTATION IS PROVIDED ON AN “AS IS,” “AS AVAILABLE,” “WITH ALL\n# FAULTS” BASIS WITHOUT WARRANTY OR  CONDITION OF ANY KIND. YOUR USE IS AT YOUR OWN RISK.** All brand names are the\n# property of their respective owners, used for identification purposes only, and do not imply product endorsement or\n# affiliation with Visa. Any links to third party sites are for your information only and equally  do not constitute\n# a Visa endorsement. Visa has no insight into and control over third party content and code and disclaims all\n# liability for any such components, including continued availability and functionality. Benefits depend on\n# implementation details and business factors and coding steps shown are exemplary only and do not reflect all\n# necessary elements for the described capabilities. Capabilities and features are subject to Visa’s terms and\n# conditions and may require development,implementation and resources by you based on your business and operational\n# details. Please refer to the specific API documentation for details on the requirements, eligibility and geographic\n# availability.*\n#\n# *This Software includes programs, concepts and details under continuing development by Visa. Any Visa features,\n# functionality, implementation, branding, and schedules may be amended, updated or canceled at Visa’s discretion.The\n# timing of widespread availability of programs and functionality is also subject to a number of factors outside\n# Visa’s control,including but not limited to deployment of necessary infrastructure by issuers, acquirers,\n# merchants and mobile device manufacturers.*\n#"
+  },
+  "basePath": "/rest/api/",
+  "tags": [
+    {
+      "name": "jwe-jws-encryption-rest-service",
+      "description": "JWE JWS Encryption Rest Service"
+    }
+  ],
+  "paths": {
+    "/createJweUsingRsaPki": {
+      "post": {
+        "tags": [
+          "jwe-jws-encryption-rest-service"
+        ],
+        "summary": "Create JWE using RSA PKI",
+        "operationId": "createJweUsingRsaPkiUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "description": "Payload",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vEncryptionKid",
+            "description": "Visa Encryption Kid (Cert ID)",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "default": "83F4EEB2"
+          },
+          {
+            "name": "vEncryptionCertificateFile",
+            "description": "Visa Encryption Certificate Public Key (PEM Format) File",
+            "in": "formData",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "vEncryptionCertificatePem",
+            "description": "Visa Encryption Certificate Public Key (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateJweResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/decryptJweUsingRsaPki": {
+      "post": {
+        "tags": [
+          "jwe-jws-encryption-rest-service"
+        ],
+        "summary": "Decrypt JWE Using RSA PKI",
+        "operationId": "decryptJweUsingRsaPkiUsingPOST",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "jwe",
+            "description": "JWE Payload",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateKeyFile",
+            "description": "Private Key File (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "privateKeyPem",
+            "description": "Private Key (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateJweResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/createJwsUsingRsaPki": {
+      "post": {
+        "tags": [
+          "jwe-jws-encryption-rest-service"
+        ],
+        "summary": "Sign the JWE Using RSA PKI",
+        "operationId": "createJwsUsingRsaPkiUsingPost",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "jwe",
+            "description": "JWE Payload",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "signingKid",
+            "description": "Signing Kid",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateKeyFile",
+            "description": "Private Key File (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "privateKeyPem",
+            "description": "Private Key (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateJwsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/verifyJwsUsingRsaPki": {
+      "post": {
+        "tags": [
+          "jwe-jws-encryption-rest-service"
+        ],
+        "summary": "Verify the JWS Using RSA PKI",
+        "operationId": "verifyJwsUsingRsaPkiUsingPost",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "jws",
+            "description": "JWS Payload",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "signingCertificateFile",
+            "description": "Signing Certificate Public Key (PEM Format) File",
+            "in": "formData",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "signingCertificatePem",
+            "description": "Signing Certificate Public Key (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VerifyJwsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/createJweJwsUsingRsaPki": {
+      "post": {
+        "tags": [
+          "jwe-jws-encryption-rest-service"
+        ],
+        "summary": "Create JWE & JWS using RSA PKI",
+        "operationId": "createJweJwsUsingRsaPkiUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "description": "Payload",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vEncryptionKid",
+            "description": "Visa Encryption Kid (Cert ID)",
+            "in": "formData",
+            "required": true,
+            "type": "string",
+            "default": "83F4EEB2"
+          },
+          {
+            "name": "vEncryptionCertificateFile",
+            "description": "Visa Encryption Certificate Public Key (PEM Format) File",
+            "in": "formData",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "vEncryptionCertificatePem",
+            "description": "Visa Encryption Certificate Public Key (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "clientSigningKid",
+            "description": "Client Signing Kid",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientSigningPrivateKeyFile",
+            "description": "Client Signing Private Key File (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "clientSigningPrivateKeyPem",
+            "description": "Client Signing Private Key (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateJweResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/verifyAndDecryptUsingRsaPki": {
+      "post": {
+        "tags": [
+          "jwe-jws-encryption-rest-service"
+        ],
+        "summary": "Verify JWS & Decrypt Extracted JWE using RSA PKI",
+        "operationId": "verifyAndDecryptUsingRsaPkiUsingPOST",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "jws",
+            "description": "JWS Payload",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vSigningCertificatePem",
+            "description": "Visa Signing Certificate Public Key (PEM Format)",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientPrivateKeyPem",
+            "description": "Client Private Key (PEM Format)",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DecryptJweResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/createJwe": {
+      "post": {
+        "tags": [
+          "jwe-jws-encryption-rest-service"
+        ],
+        "summary": "Create JWE Using API Key & Shared Secret",
+        "operationId": "createJweUsingPOST",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "payload",
+            "description": "Payload",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiKey",
+            "description": "Your Encryption API Key",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedSecret",
+            "description": "Your Encryption Shared Secret",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateJweResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/decryptJwe": {
+      "post": {
+        "tags": [
+          "jwe-jws-encryption-rest-service"
+        ],
+        "summary": "Decrypt JWE Using Shared Secret",
+        "operationId": "decryptJweUsingPOST",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "jwe",
+            "description": "JWE Payload",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sharedSecret",
+            "description": "Your Encryption Shared Secret",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateJweResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/signBindingRequest": {
+      "post": {
+        "tags": [
+          "jwe-jws-encryption-rest-service"
+        ],
+        "summary": "Sign Device Binding Request",
+        "operationId": "signBindingRequestUsingPOST",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "clientDeviceID",
+            "description": "Client Device ID",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clientReferenceID",
+            "description": "Client Reference ID",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vProvisionedTokenID",
+            "description": "Provisioned Token ID",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nonce",
+            "description": "Nonce",
+            "in": "formData",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "signingKid",
+            "description": "Signing Kid",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateKeyFile",
+            "description": "Private Key File (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "file"
+          },
+          {
+            "name": "privateKeyPem",
+            "description": "Private Key (PEM Format)",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CreateJweResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "CreateJweResponse": {
+      "type": "object",
+      "properties": {
+        "encData": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "CreateJweResponse"
+    },
+    "CreateJwsResponse": {
+      "type": "object",
+      "properties": {
+        "encData": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "CreateJwsResponse"
+    },
+    "VerifyJwsResponse": {
+      "type": "object",
+      "properties": {
+        "verified": {
+          "type": "boolean"
+        },
+        "payload": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "VerifyJwsResponse"
+    },
+    "DecryptJweResponse": {
+      "type": "object",
+      "properties": {
+        "payload": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "title": "DecryptJwsResponse"
+    }
+  }
+}
